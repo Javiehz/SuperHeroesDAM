@@ -9,6 +9,5 @@ class SuperHeroesDataRepository(val superHeroesApiDataSource: SuperHeroesApiData
 
         override fun getAll(): Result<List<SuperHeroe>> {
             return superHeroesApiDataSource.getSuperHeroes()
-
         }
 }
