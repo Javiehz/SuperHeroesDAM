@@ -1,4 +1,13 @@
 package edu.iesam.superheroesdam.data
 
-class SuperHeroesDataRepository {
+import edu.iesam.superheroesdam.data.remote.SuperHeroesApiDataSource
+import edu.iesam.superheroesdam.domain.SuperHeroe
+import edu.iesam.superheroesdam.domain.SuperHeroesRepository
+
+class SuperHeroesDataRepository(val superHeroesApiDataSource: SuperHeroesApiDataSource):
+    SuperHeroesRepository {
+
+        override fun getAll(): Result<List<SuperHeroe>> {
+            return superHeroesApiDataSource.getSuperHeroes()
+        }
 }
