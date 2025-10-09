@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SuperHeroesDAM">
         <activity
-            android:name=".presentation.SuperHeroesListActivity"
+            android:name=".features.presentation.SuperHeroesListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

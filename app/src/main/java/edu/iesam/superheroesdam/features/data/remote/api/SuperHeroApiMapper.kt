@@ -1,6 +1,6 @@
-package edu.iesam.superheroesdam.data.remote.api
+package edu.iesam.superheroesdam.features.data.remote.api
 
-import edu.iesam.superheroesdam.domain.SuperHeroe
+import edu.iesam.superheroesdam.features.domain.SuperHeroe
 
 fun SuperHeroeApiModel.toModel() : SuperHeroe {
     return SuperHeroe(

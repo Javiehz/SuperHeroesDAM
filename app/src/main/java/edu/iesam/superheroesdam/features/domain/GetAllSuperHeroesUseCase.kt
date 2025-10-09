@@ -1,4 +1,4 @@
-package edu.iesam.superheroesdam.domain
+package edu.iesam.superheroesdam.features.domain
 
 class GetAllSuperHeroesUseCase(val superHeroesRepository: SuperHeroesRepository) {
     operator fun invoke():Result<List<SuperHeroe>>{

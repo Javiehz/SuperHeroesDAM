@@ -1,4 +1,4 @@
-package edu.iesam.superheroesdam.presentation
+package edu.iesam.superheroesdam.features.presentation
 
 import android.os.Bundle
 import android.util.Log
@@ -7,11 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import edu.iesam.superheroesdam.R
-import edu.iesam.superheroesdam.data.SuperHeroesDataRepository
-import edu.iesam.superheroesdam.data.remote.api.SuperHeroesApiDataSource
-import edu.iesam.superheroesdam.domain.GetAllSuperHeroesUseCase
-import edu.iesam.superheroesdam.domain.SuperHeroe
-import edu.iesam.superheroesdam.domain.SuperHeroesRepository
+import edu.iesam.superheroesdam.features.data.SuperHeroesDataRepository
+import edu.iesam.superheroesdam.features.data.remote.api.SuperHeroesApiDataSource
+import edu.iesam.superheroesdam.features.domain.GetAllSuperHeroesUseCase
 
 
 class SuperHeroesListActivity : AppCompatActivity() {

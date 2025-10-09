@@ -1,4 +1,4 @@
-package edu.iesam.superheroesdam.data.remote.api
+package edu.iesam.superheroesdam.features.data.remote.api
 
 data class SuperHeroeApiModel
     (val id: String,

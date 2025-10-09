@@ -1,8 +1,8 @@
-package edu.iesam.superheroesdam.presentation
+package edu.iesam.superheroesdam.features.presentation
 
 import androidx.lifecycle.ViewModel
-import edu.iesam.superheroesdam.domain.GetAllSuperHeroesUseCase
-import edu.iesam.superheroesdam.domain.SuperHeroe
+import edu.iesam.superheroesdam.features.domain.GetAllSuperHeroesUseCase
+import edu.iesam.superheroesdam.features.domain.SuperHeroe
 
 class SuperHeroesListViewModel(val getAllSuperHeroesUseCase: GetAllSuperHeroesUseCase) : ViewModel() {
 
