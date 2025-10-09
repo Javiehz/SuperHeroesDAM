@@ -1,6 +1,6 @@
 package edu.iesam.superheroesdam.data
 
-import edu.iesam.superheroesdam.data.remote.SuperHeroesApiDataSource
+import edu.iesam.superheroesdam.data.remote.api.SuperHeroesApiDataSource
 import edu.iesam.superheroesdam.domain.SuperHeroe
 import edu.iesam.superheroesdam.domain.SuperHeroesRepository
 
