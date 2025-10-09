@@ -7,9 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import edu.iesam.superheroesdam.R
+import edu.iesam.superheroesdam.core.api.ApiClient
 import edu.iesam.superheroesdam.features.data.SuperHeroesDataRepository
 import edu.iesam.superheroesdam.features.data.remote.api.SuperHeroesApiDataSource
 import edu.iesam.superheroesdam.features.domain.GetAllSuperHeroesUseCase
+import kotlin.concurrent.thread
 
 
 class SuperHeroesListActivity : AppCompatActivity() {
@@ -25,20 +27,18 @@ class SuperHeroesListActivity : AppCompatActivity() {
 
         }
 
-        val superHeroesApiDataSource = SuperHeroesApiDataSource()
-        val superHeroesDataRepository = SuperHeroesDataRepository(superHeroesApiDataSource)
-        val getAllSuperHeroesUseCase = GetAllSuperHeroesUseCase(superHeroesDataRepository)
-
-        val viewModel = SuperHeroesListViewModel(getAllSuperHeroesUseCase)
-        viewModel.getSuperheroes().fold(
-            onSuccess = {list ->
-                Log.d("@dev","Esta bien")
-                //TODO: DEVOLVER LA LISTA
-            },
-            onFailure = {error ->
-                Log.d("@error","No esta bien")
-            }
-        )
+        loadSuperHeroes()
     }
+    private fun loadSuperHeroes(){
+        val apiRemote = SuperHeroesApiDataSource(ApiClient())
+        thread {
+            val models = apiRemote.getSuperHeroes()
+            models
+        }
+        Log.d("@dev", "Hola1")
 
+
+
+
+    }
 }
