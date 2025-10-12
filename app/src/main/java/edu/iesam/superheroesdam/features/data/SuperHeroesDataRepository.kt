@@ -7,7 +7,7 @@ import edu.iesam.superheroesdam.features.domain.SuperHeroesRepository
 class SuperHeroesDataRepository(val superHeroesApiDataSource: SuperHeroesApiDataSource):
     SuperHeroesRepository {
 
-        override fun getAll(): Result<List<SuperHeroe>> {
+        override suspend fun getAll(): Result<List<SuperHeroe>> {
             return superHeroesApiDataSource.getSuperHeroes()
         }
 }
