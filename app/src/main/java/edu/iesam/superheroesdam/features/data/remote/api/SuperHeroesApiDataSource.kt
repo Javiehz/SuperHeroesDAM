@@ -16,7 +16,7 @@ class SuperHeroesApiDataSource(private val apiClient: ApiClient) {
         //SALEN MODELS (SuperHeroe)
         return withContext(Dispatchers.IO) {
             val apiService = apiClient.createService(SuperHeroeApiService::class.java)
-            val resultSuperHeroe = apiService.findAll().execute()
+            val resultSuperHeroe = apiService.findAll()
             //JAVA VERSION:
             if (resultSuperHeroe.isSuccessful && resultSuperHeroe.errorBody() == null) {
                 val listSuperHeroeApiModel: List<SuperHeroeApiModel> = resultSuperHeroe.body()!!

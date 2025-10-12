@@ -1,14 +1,15 @@
 package edu.iesam.superheroesdam.features.data.remote.api
 
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface SuperHeroeApiService {
 
     @GET("all.json")
-    fun findAll(): Call<List<SuperHeroeApiModel>>
+    suspend fun findAll(): Response<List<SuperHeroeApiModel>>
 
     @GET("id/{superHeroeId}.json")
-    fun findById(@Path("superHeroeId") id: String)
+    suspend fun findById(@Path("superHeroeId") id: String)
 }
