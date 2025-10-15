@@ -11,6 +11,7 @@ import okhttp3.Dispatcher
 class SuperHeroesApiDataSource(private val apiClient: ApiClient) {
 
 
+
     suspend fun getSuperHeroes(): Result<List<SuperHeroe>> {
         //ENTRAN APIMODELS (SuperHeroeApiModel)
         //SALEN MODELS (SuperHeroe)
@@ -36,8 +37,22 @@ class SuperHeroesApiDataSource(private val apiClient: ApiClient) {
             it.toModel()
             }
          */
-
-
-
     }
+
+    suspend fun getSuperHeroeById(id: String):Result<SuperHeroe>{
+
+        return withContext(Dispatchers.IO) {
+            val apiService = apiClient.createService(SuperHeroeApiService::class.java)
+            val resultSuperHeroe = apiService.findById(id)
+
+            if (resultSuperHeroe.isSuccessful && resultSuperHeroe.errorBody() == null) {
+                val superHeroeApiModel: SuperHeroeApiModel = resultSuperHeroe.body()!!
+                val superHeroe = superHeroeApiModel.toModel()
+                Result.success(superHeroe)
+            } else {
+                Result.failure(ErrorApp.ServerError)
+            }
+        }
+    }
+
 }
