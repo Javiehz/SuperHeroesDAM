@@ -12,16 +12,20 @@ import edu.iesam.superheroesdam.core.api.ApiClient
 import edu.iesam.superheroesdam.features.data.SuperHeroesDataRepository
 import edu.iesam.superheroesdam.features.data.remote.api.SuperHeroesApiDataSource
 import edu.iesam.superheroesdam.features.domain.GetAllSuperHeroesUseCase
+import edu.iesam.superheroesdam.features.domain.GetByIdSuperHeroUseCase
 import edu.iesam.superheroesdam.features.domain.SuperHeroesRepository
 import kotlin.concurrent.thread
 
 
 class SuperHeroesListActivity : AppCompatActivity() {
 
-    private val viewModel = SuperHeroesListViewModel(
+    private val listViewModel = SuperHeroesListViewModel(
         GetAllSuperHeroesUseCase(
             SuperHeroesDataRepository(
                 SuperHeroesApiDataSource(ApiClient()))))
+
+    private val heroeViewModel = SuperHeroeViewModel(GetByIdSuperHeroUseCase(
+        SuperHeroesDataRepository(SuperHeroesApiDataSource(ApiClient()))))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,11 +39,34 @@ class SuperHeroesListActivity : AppCompatActivity() {
 
         }
 
-        setupObserver()
-        viewModel.loadSuperHeroes()
+        setupHeroObserver()
+        setupListHeroesObserver()
+
+        heroeViewModel.loadSuperHero("2")
+        listViewModel.loadSuperHeroes()
     }
 
-    private fun setupObserver(){
+    private fun setupHeroObserver() {
+        val observer = Observer<SuperHeroeViewModel.UiState> { uiState ->
+            if (uiState.isLoading) {
+                Log.d("DEBUG", "Cargando superhéroe...")
+            }
+
+            uiState.error?.let {
+                Log.e("DEBUG", "Error al cargar superhéroe: $it")
+            }
+
+            uiState.superhero?.let { hero ->
+                Log.d("DEBUG", "Superhéroe recibido: $hero")
+                // Aquí actualizarías tu UI con hero.name, hero.power, etc.
+                hero
+            }
+        }
+
+        heroeViewModel.uiState.observe(this, observer)
+    }
+
+    private fun setupListHeroesObserver(){
         val observer = Observer<SuperHeroesListViewModel.UiState>{ uiState ->
             if(uiState.isLoading){
                 //TODO: Mostrar spinner de carga.
@@ -51,10 +78,11 @@ class SuperHeroesListActivity : AppCompatActivity() {
             }
 
             uiState.superheroes?.let { superheroes ->
-               //TODO: Añadir superheroes interfaz
+               //TODO: Añadir superheroes interfaz superheroes
+                superheroes
             }
 
         }
-        viewModel.uiState.observe(this, observer)
+        listViewModel.uiState.observe(this, observer)
     }
 }

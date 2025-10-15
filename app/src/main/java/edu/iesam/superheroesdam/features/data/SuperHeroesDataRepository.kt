@@ -10,4 +10,8 @@ class SuperHeroesDataRepository(val superHeroesApiDataSource: SuperHeroesApiData
         override suspend fun getAll(): Result<List<SuperHeroe>> {
             return superHeroesApiDataSource.getSuperHeroes()
         }
+
+    override suspend fun getById(id: String): Result<SuperHeroe> {
+        return superHeroesApiDataSource.getSuperHeroeById(id)
+    }
 }
